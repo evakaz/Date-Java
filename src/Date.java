@@ -7,18 +7,22 @@ Provide a method displayDate that displays the month, day, and year separated
 by forward slashes (/). Write a test application named DateTest that demonstrates class Date’s  capabilities. */
 
 import java.io.*;
+import java.util.*;
 
 public class Date {
     private int month;
     private int day;
     private int year;
     
+    Hashtable<int, int> numberOfDaysInMonth = new Hashtable<int,int>();
     
-    public Date()
+    
+    public Date(int day, int month, int year)
     {
-    month = 12;
-    day = 13;
-    year = 2022;
+    	this.day = day;
+    	this.month = month;
+    	this.year = year;
+    	
     }
 
     public int getMonth(){
@@ -28,19 +32,14 @@ public class Date {
 
     public void setMonth(int newMonth)
     {
-        try
-        {
-            if (newMonth > 12 || newMonth < 1)
-            {
-                throw new IllegalArgumentException("The value is out of range.");
-            }
-            this.month = newMonth;
-        }
-        catch (Exception e)
-        {
-            throw new IllegalArgumentException();
-        }
-    }
+		if (newMonth > 12 || newMonth < 1)
+		{
+			throw new IllegalArgumentException("The value is out of range.");
+		}
+		this.month = newMonth;
+	}
+    
+    
     public int getDay(){
         return day;
     }
@@ -48,42 +47,29 @@ public class Date {
 
     public void setDay(int newDay)
     {
-        try
+        if (newDay > 31 || newDay < 1)
         {
-            if (newDay > 31 || newDay < 1)
-            {
-                throw new IllegalArgumentException("The value is out of range.");
-            }
-            this.month = newDay;
+            throw new IllegalArgumentException("The value is out of range.");
         }
-        catch (Exception e)
-        {
-            throw new IllegalArgumentException();
-        }
+        this.month = newDay;
     }
-    public int getYear(){
+
+    public int getYear() {
         return year;
     }
 
 
     public void setYear(int newYear)
     {
-        try
+        if (newYear > 0)
         {
-            if (newYear > 12 || newYear < 1)
-            {
-                throw new IllegalArgumentException("The value is out of range.");
-            }
-            this.month = newYear;
+            throw new IllegalArgumentException("The value is out of range.");
         }
-        catch (Exception e)
-        {
-            throw new IllegalArgumentException();
-        }
+        this.month = newYear;
     }
     
     public String displayDate()
     {
-    	return "The current date is " + getDay() + "." + getMonth() + "." + getYear();
+    	return "The current date is " + getDay() + "/" + getMonth() + "/" + getYear();
     }
 }

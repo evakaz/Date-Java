@@ -13,17 +13,37 @@ public class Date {
     private int month;
     private int day;
     private int year;
-    
-    Hashtable<int, int> numberOfDaysInMonth = new Hashtable<int,int>();
-    
-    
+    private final int[] daysPerMonth = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+
+   
     public Date(int day, int month, int year)
     {
+    	check(day, month, year);
     	this.day = day;
     	this.month = month;
     	this.year = year;
-    	
     }
+    
+    private void check(int day, int month, int year) {
+    	if (year < 0)
+        {
+            throw new IllegalArgumentException("The value is out of range.");
+        }
+    	if (month < 1 || month > 12) {
+    		throw new IllegalArgumentException("The value is out of range.");
+    	}
+    	if (year % 4 == 0)
+    	{
+    		daysPerMonth[1] = 29;
+    	}
+    	int maxNumDays = daysPerMonth[month-1];
+    	if (day > maxNumDays || day < 1)
+        {
+            throw new IllegalArgumentException("The value is out of range.");
+        }
+    }
+    
+
 
     public int getMonth(){
         return month;
@@ -32,10 +52,7 @@ public class Date {
 
     public void setMonth(int newMonth)
     {
-		if (newMonth > 12 || newMonth < 1)
-		{
-			throw new IllegalArgumentException("The value is out of range.");
-		}
+    	check(day, newMonth, year);
 		this.month = newMonth;
 	}
     
@@ -47,10 +64,7 @@ public class Date {
 
     public void setDay(int newDay)
     {
-        if (newDay > 31 || newDay < 1)
-        {
-            throw new IllegalArgumentException("The value is out of range.");
-        }
+    	check(newDay, month, year);
         this.month = newDay;
     }
 
@@ -61,10 +75,7 @@ public class Date {
 
     public void setYear(int newYear)
     {
-        if (newYear > 0)
-        {
-            throw new IllegalArgumentException("The value is out of range.");
-        }
+    	check(day, month, newYear);
         this.month = newYear;
     }
     

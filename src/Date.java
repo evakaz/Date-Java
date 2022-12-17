@@ -4,20 +4,18 @@ Your class should have a constructor that initializes the three instance variabl
 Provide a set and a get method for each instance variable.
 Implement checks for date validity when setting any variable.
 Provide a method displayDate that displays the month, day, and year separated
-by forward slashes (/). Write a test application named DateTest that demonstrates class Date’s  capabilities. */
-
-import java.io.*;
-import java.util.*;
+by forward slashes (/). Write a test application named DateTest that demonstrates class Date’s  capabilities. 
+It is not allowed to use built-in date functions in Java. 
+*/
 
 public class Date {
     private int month;
     private int day;
     private int year;
-    private final int[] daysPerMonth = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
+    private final static int[] DAYS_PER_MONTH = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
    
-    public Date(int day, int month, int year)
-    {
+    public Date(int day, int month, int year) {
     	check(day, month, year);
     	this.day = day;
     	this.month = month;
@@ -25,45 +23,36 @@ public class Date {
     }
     
     private void check(int day, int month, int year) {
-    	if (year < 0)
-        {
+    	if (year < 0) {
             throw new IllegalArgumentException("The value is out of range.");
         }
     	if (month < 1 || month > 12) {
     		throw new IllegalArgumentException("The value is out of range.");
     	}
-    	if (year % 4 == 0)
-    	{
-    		daysPerMonth[1] = 29;
+    	int maxNumDays = DAYS_PER_MONTH[month-1];
+    	if (year % 4 == 0 && month == 2) {
+    		maxNumDays = 29;
     	}
-    	int maxNumDays = daysPerMonth[month-1];
-    	if (day > maxNumDays || day < 1)
-        {
+
+    	if (day > maxNumDays || day < 1) {
             throw new IllegalArgumentException("The value is out of range.");
         }
     }
     
-
-
-    public int getMonth(){
+    public int getMonth() {
         return month;
     }
 
-
-    public void setMonth(int newMonth)
-    {
+    public void setMonth(int newMonth) {
     	check(day, newMonth, year);
 		this.month = newMonth;
 	}
     
-    
-    public int getDay(){
+    public int getDay() {
         return day;
     }
 
-
-    public void setDay(int newDay)
-    {
+    public void setDay(int newDay) {
     	check(newDay, month, year);
         this.month = newDay;
     }
@@ -72,15 +61,12 @@ public class Date {
         return year;
     }
 
-
-    public void setYear(int newYear)
-    {
+    public void setYear(int newYear) {
     	check(day, month, newYear);
         this.month = newYear;
     }
     
-    public String displayDate()
-    {
+    public String displayDate() {
     	return "The current date is " + getDay() + "/" + getMonth() + "/" + getYear();
     }
 }

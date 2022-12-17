@@ -3,73 +3,76 @@ import static org.junit.jupiter.api.Assertions.*;
 import org.junit.jupiter.api.Test;
 
 class DateTest {
-	Date dat = new Date(13,12,2002);
 	
 	@Test
-	void testDate() {
-		//Date dat = new Date();
-		Date dat = new Date(13,12,2002);
-	}
-	@Test
-	void testDate2(){
+	void testInvalidConstructorDate() {
 		Exception ex = assertThrows(Exception.class, () -> new Date(76,12,2002));
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
 	@Test
-	void testLeap() {
+	void testNonLeap() {
 		Exception ex = assertThrows(Exception.class, () -> new Date(29, 2, 2002));
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
 
 	@Test
-	void testLeapDone() {
+	void testLeap() {
 		Date dat = new Date(29,2,2004);
 		assertEquals(dat.displayDate(), "The current date is 29/2/2004");
+		assertThrows(Exception.class, () -> dat.setYear(2005));
 	}
 	
 	@Test
-	void testYr()
-	{
+	void testInvalidYear() {
 		Exception ex = assertThrows(Exception.class, () -> new Date(29, 2, -1));
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
 	
 	@Test
-	void testSetMonthFail(){
+	void testSetMonthFail() {
+		Date dat = new Date(13, 12, 2002);
 		Exception ex = assertThrows(Exception.class, () -> dat.setMonth(1000));
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
 	@Test
-	void testSetDayFail(){
+	void testSetDayFail() {
+		Date dat = new Date(13, 12, 2002);
 		Exception ex = assertThrows(Exception.class, () -> dat.setDay(600));
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
 
 	@Test
 	void testGetMonth() {
+		Date dat = new Date(13, 12, 2002);
 		assertEquals(dat.getMonth(),12);
 	}
 
 	@Test
-	void testSetYearFail(){
+	void testSetYearFail() {
+		Date dat = new Date(13, 12, 2002);
 		Exception ex = assertThrows(Exception.class, () -> dat.setYear(-1000));
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
 	
 	@Test
 	void testGetDay() {
+		Date dat = new Date(13, 12, 2002);
 		assertEquals(dat.getDay(),13);
 	}
 
 
 	@Test
-	void testGetYear() {
+	void testGetters() {
+		Date dat = new Date(13, 12, 2002);
 		assertEquals(dat.getYear(), 2002);
+		assertEquals(dat.getMonth(), 12);
+		assertEquals(dat.getDay(), 13);
 	}
 
 
 	@Test
 	void testDisplayDate() {
+		Date dat = new Date(13,12,2002);
 		assertEquals(dat.displayDate(), "The current date is 13/12/2002");
 	}
 	

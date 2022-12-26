@@ -6,12 +6,14 @@ Implement checks for date validity when setting any variable.
 Provide a method displayDate that displays the month, day, and year separated
 by forward slashes (/). Write a test application named DateTest that demonstrates class Date’s  capabilities. 
 It is not allowed to use built-in date functions in Java. 
+Create a function, that allows add days to the current date.
 */
 
 public class Date {
     private int month;
     private int day;
     private int year;
+    //private int maxNumDays;
     private final static int[] DAYS_PER_MONTH = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
    
@@ -22,6 +24,16 @@ public class Date {
     	this.year = year;
     }
     
+    
+    private int getMaxNumDays(int myMonth, int myYear) {
+    	int maxNumDays = DAYS_PER_MONTH[myMonth-1];
+    	if (myYear % 4 == 0 && myMonth == 2) {
+    		maxNumDays = 29;
+    	}
+    	return maxNumDays;
+    	
+    }
+    
     private void check(int day, int month, int year) {
     	if (year < 0) {
             throw new IllegalArgumentException("The value is out of range.");
@@ -29,12 +41,7 @@ public class Date {
     	if (month < 1 || month > 12) {
     		throw new IllegalArgumentException("The value is out of range.");
     	}
-    	int maxNumDays = DAYS_PER_MONTH[month-1];
-    	if (year % 4 == 0 && month == 2) {
-    		maxNumDays = 29;
-    	}
-
-    	if (day > maxNumDays || day < 1) {
+    	if (day > getMaxNumDays(month, year) || day < 1) {
             throw new IllegalArgumentException("The value is out of range.");
         }
     }
@@ -68,5 +75,28 @@ public class Date {
     
     public String displayDate() {
     	return "The current date is " + getDay() + "/" + getMonth() + "/" + getYear();
+    }
+ 
+
+    public void addDay(int addedDay) {
+    	int maxNumDays = getMaxNumDays(this.month, this.year);
+        this.day = this.day + addedDay;
+        while (this.day > maxNumDays) {
+        	this.month++;
+            this.day = this.day - maxNumDays; 
+            if (this.month > 12) {
+            	this.year++;
+            	this.month = 1; 
+            } 
+            maxNumDays = getMaxNumDays(this.month, this.year);
+        }
+        // 4.2.2002
+        //5
+        //4-5 = -1
+        //maxnumDays[2-1-1] = 31
+        // 31 +- 1
+        //30.1
+     
+
     }
 }

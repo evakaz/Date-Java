@@ -75,6 +75,21 @@ class DateTest {
 		Date dat = new Date(13,12,2002);
 		assertEquals(dat.displayDate(), "The current date is 13/12/2002");
 	}
+
+	@Test
+	void testAddDay() {
+		Date d = new Date(1,1,2000);
+		d.addDay(32);
+		assertEquals("The current date is 2/2/2000", d.displayDate());
+
+	}
+	
+	@Test 
+	void testAddDay2() {
+		Date d = new Date(1,12,2000);
+		d.addDay(31);
+		assertEquals(d.displayDate(), "The current date is 1/1/2001");
+	}
 	
 
 }

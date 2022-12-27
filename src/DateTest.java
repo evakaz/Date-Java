@@ -93,11 +93,44 @@ class DateTest {
 	
 	
 	@Test
-	void testSubDay() {
-		Date d = new Date(4,2,2000);
-		d.subscDays(5);
-		assertEquals(d.displayDate(), "The current date is 30/1/2000");
+	void testAddDaysNeg() {
+		Date d = new Date(9,1,2000);
+		d.addDay(-2);
+		assertEquals(d.displayDate(), "The current date is 7/1/2000");
 		
+	}
+	
+	
+	@Test
+	void testSubDay() {
+		Date d = new Date(4,2,2001);
+		d.subscDays(5);
+		assertEquals(d.displayDate(), "The current date is 30/1/2001");
+		
+	}
+	
+	@Test
+	void subDaysYear() {
+		Date d = new Date(1,1,2000);
+		d.subscDays(9);
+		assertEquals("The current date is 23/12/1999", d.displayDate());
+		
+	}
+	
+	
+	@Test
+	void testSubDays2() {
+		Date d = new Date(4,3,2004);
+		d.subscDays(5);
+		assertEquals("The current date is 28/2/2004", d.displayDate());
+	}
+	
+	
+	@Test
+	void testSubDayNotNegative() {
+		Date d = new Date(24,1,2002);
+		d.subscDays(4);
+		assertEquals(d.displayDate(), "The current date is 20/1/2002");
 	}
 	
 

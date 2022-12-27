@@ -91,5 +91,14 @@ class DateTest {
 		assertEquals(d.displayDate(), "The current date is 1/1/2001");
 	}
 	
+	
+	@Test
+	void testSubDay() {
+		Date d = new Date(4,2,2000);
+		d.subscDays(5);
+		assertEquals(d.displayDate(), "The current date is 30/1/2000");
+		
+	}
+	
 
 }

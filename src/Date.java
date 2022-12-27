@@ -7,6 +7,7 @@ Provide a method displayDate that displays the month, day, and year separated
 by forward slashes (/). Write a test application named DateTest that demonstrates class Date’s  capabilities. 
 It is not allowed to use built-in date functions in Java. 
 Create a function, that allows add days to the current date.
+Create a function, that allows subtract days to the current date.
 */
 
 public class Date {
@@ -76,6 +77,25 @@ public class Date {
     public String displayDate() {
     	return "The current date is " + getDay() + "/" + getMonth() + "/" + getYear();
     }
+    
+    public void subscDays(int subDay) {
+    	int maxNumDays = getMaxNumDays(this.month, this.year);
+    	this.day = this.day - subDay;
+    	while (this.day <= 0) {
+    		this.month--;
+    		maxNumDays = getMaxNumDays(this.month, this.year);
+    		this.day = maxNumDays + this.day;
+	    	if (this.month > 12) {
+	        	this.year--;
+	        	this.month = 12; 
+	        }
+    	}
+    }
+    	
+    	
+    
+    	
+    	
  
 
     public void addDay(int addedDay) {
@@ -87,9 +107,11 @@ public class Date {
             if (this.month > 12) {
             	this.year++;
             	this.month = 1; 
-            } 
-            maxNumDays = getMaxNumDays(this.month, this.year);
+            }
         }
+            maxNumDays = getMaxNumDays(this.month, this.year);
+    }
+        
         // 4.2.2002
         //5
         //4-5 = -1
@@ -98,5 +120,5 @@ public class Date {
         //30.1
      
 
-    }
+    
 }

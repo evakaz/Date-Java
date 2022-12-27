@@ -77,18 +77,22 @@ public class Date {
     	return "The current date is " + getDay() + "/" + getMonth() + "/" + getYear();
     }
     
-    public void subscDays(int subDay) {
-    	int maxNumDays = getMaxNumDays(this.month, this.year); 
-    	this.day = this.day - subDay;
-    	while (this.day < 0) {
-    		this.month--;
-    		while(this.month <= 0) {
-    			this.year--;
-    			this.month = 12;
-    		}
-    		maxNumDays = getMaxNumDays(this.month, this.year);
-    		this.day = maxNumDays + this.day;
-    	}
+    public void subsctractDays(int subDay) {
+    	if(subDay >= 0) {
+		int maxNumDays = getMaxNumDays(this.month, this.year); 
+		this.day = this.day - subDay;
+		while (this.day <= 0) {
+			this.month--;
+			while(this.month <= 0) {
+				this.year--;
+				this.month = 12;
+			}
+			this.day = getMaxNumDays(this.month, this.year) + this.day;
+		}
+	}
+	else {
+		throw new IllegalArgumentException("The value cannot be negative.");
+	}
     }
     
     public void addDay(int addedDay) {

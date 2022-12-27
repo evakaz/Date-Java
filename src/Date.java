@@ -14,7 +14,6 @@ public class Date {
     private int month;
     private int day;
     private int year;
-    //private int maxNumDays;
     private final static int[] DAYS_PER_MONTH = new int[]{31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31};
 
    
@@ -78,47 +77,41 @@ public class Date {
     	return "The current date is " + getDay() + "/" + getMonth() + "/" + getYear();
     }
     
-    public void subscDays(int subDay) {
-    	int maxNumDays = getMaxNumDays(this.month, this.year);
-    	this.day = this.day - subDay;
-    	while (this.day <= 0) {
-    		this.month--;
-    		maxNumDays = getMaxNumDays(this.month, this.year);
-    		this.day = maxNumDays + this.day;
-	    	if (this.month > 12) {
-	        	this.year--;
-	        	this.month = 12; 
+    public void subsctractDays(int subDay) {
+    	if(subDay >= 0) {
+		int maxNumDays = getMaxNumDays(this.month, this.year); 
+		this.day = this.day - subDay;
+		while (this.day <= 0) {
+			this.month--;
+			while(this.month <= 0) {
+				this.year--;
+				this.month = 12;
+			}
+			this.day = getMaxNumDays(this.month, this.year) + this.day;
+		}
+	}
+	else {
+		throw new IllegalArgumentException("The value cannot be negative.");
+	}
+    }
+    
+    public void addDay(int addedDay) {
+    	if (addedDay > 0) {
+    		int maxNumDays = getMaxNumDays(this.month, this.year);
+    	
+	        this.day = this.day + addedDay;
+	        while (this.day > maxNumDays) {
+	        	this.month++;
+	            this.day = this.day - maxNumDays; 
+	            if (this.month > 12) {
+	            	this.year++;
+	            	this.month = 1; 
+	            }
 	        }
+            maxNumDays = getMaxNumDays(this.month, this.year);
+    	}
+    	else {
+    		subscDays(-addedDay);
     	}
     }
-    	
-    	
-    
-    	
-    	
- 
-
-    public void addDay(int addedDay) {
-    	int maxNumDays = getMaxNumDays(this.month, this.year);
-        this.day = this.day + addedDay;
-        while (this.day > maxNumDays) {
-        	this.month++;
-            this.day = this.day - maxNumDays; 
-            if (this.month > 12) {
-            	this.year++;
-            	this.month = 1; 
-            }
-        }
-            maxNumDays = getMaxNumDays(this.month, this.year);
-    }
-        
-        // 4.2.2002
-        //5
-        //4-5 = -1
-        //maxnumDays[2-1-1] = 31
-        // 31 +- 1
-        //30.1
-     
-
-    
 }

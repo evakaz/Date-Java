@@ -79,7 +79,6 @@ public class Date {
     
     public void subsctractDays(int subDay) {
     	if(subDay >= 0) {
-		int maxNumDays = getMaxNumDays(this.month, this.year); 
 		this.day = this.day - subDay;
 		while (this.day <= 0) {
 			this.month--;
@@ -89,13 +88,13 @@ public class Date {
 			}
 			this.day = getMaxNumDays(this.month, this.year) + this.day;
 		}
-	}
-	else {
-		throw new IllegalArgumentException("The value cannot be negative.");
-	}
+    	}
+    	else {
+    		throw new IllegalArgumentException("The value cannot be negative.");
+    	}
     }
     
-    public void addDay(int addedDay) {
+    public void addDays(int addedDay) {
     	if (addedDay > 0) {
     		int maxNumDays = getMaxNumDays(this.month, this.year);
     	
@@ -111,7 +110,7 @@ public class Date {
             maxNumDays = getMaxNumDays(this.month, this.year);
     	}
     	else {
-    		subscDays(-addedDay);
+    		subsctractDays(-addedDay);
     	}
     }
 }

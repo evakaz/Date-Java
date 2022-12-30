@@ -1,20 +1,24 @@
 import static org.junit.jupiter.api.Assertions.*;
 
+import org.junit.experimental.categories.Category;
 import org.junit.jupiter.api.Test;
 
 class DateTest {
-	
+	@Category(BaseTests.class)
 	@Test
 	void testInvalidConstructorDate() {
 		Exception ex = assertThrows(Exception.class, () -> new Date(76,12,2002));
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
+	
+	@Category(BaseTests.class)
 	@Test
 	void testNonLeap() {
 		Exception ex = assertThrows(Exception.class, () -> new Date(29, 2, 2002));
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
 
+	@Category(BaseTests.class)
 	@Test
 	void testLeap() {
 		Date dat = new Date(29,2,2004);
@@ -22,18 +26,22 @@ class DateTest {
 		assertThrows(Exception.class, () -> dat.setYear(2005));
 	}
 	
+	@Category(BaseTests.class)
 	@Test
 	void testInvalidYear() {
 		Exception ex = assertThrows(Exception.class, () -> new Date(29, 2, -1));
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
 	
+	@Category(BaseTests.class)
 	@Test
 	void testSetMonthFail() {
 		Date dat = new Date(13, 12, 2002);
 		Exception ex = assertThrows(Exception.class, () -> dat.setMonth(1000));
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
+	
+	@Category(BaseTests.class)
 	@Test
 	void testSetDayFail() {
 		Date dat = new Date(13, 12, 2002);
@@ -41,12 +49,14 @@ class DateTest {
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
 
+	@Category(BaseTests.class)
 	@Test
 	void testGetMonth() {
 		Date dat = new Date(13, 12, 2002);
 		assertEquals(dat.getMonth(),12);
 	}
 
+	@Category(BaseTests.class)
 	@Test
 	void testSetYearFail() {
 		Date dat = new Date(13, 12, 2002);
@@ -54,13 +64,14 @@ class DateTest {
 		assertEquals("The value is out of range.", ex.getMessage());
 	}
 	
+	@Category(BaseTests.class)
 	@Test
 	void testGetDay() {
 		Date dat = new Date(13, 12, 2002);
 		assertEquals(dat.getDay(),13);
 	}
 
-
+	@Category(BaseTests.class)
 	@Test
 	void testGetters() {
 		Date dat = new Date(13, 12, 2002);
@@ -68,7 +79,6 @@ class DateTest {
 		assertEquals(dat.getMonth(), 12);
 		assertEquals(dat.getDay(), 13);
 	}
-
 
 	@Test
 	void testDisplayDate() {

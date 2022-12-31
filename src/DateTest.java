@@ -1,7 +1,13 @@
 import static org.junit.jupiter.api.Assertions.*;
 
 import org.junit.experimental.categories.Category;
+import org.junit.experimental.categories.Categories;
 import org.junit.jupiter.api.Test;
+import org.junit.runner.RunWith;
+
+@RunWith(Categories.class)
+@Categories.IncludeCategory(BaseTests.class)
+//@Categories.IncludeCategory(MethodTests.class)
 
 class DateTest {
 	@Category(BaseTests.class)
@@ -80,12 +86,14 @@ class DateTest {
 		assertEquals(dat.getDay(), 13);
 	}
 
+	@Category(MethodTests.class)
 	@Test
 	void testDisplayDate() {
 		Date dat = new Date(13,12,2002);
 		assertEquals(dat.displayDate(), "The current date is 13/12/2002");
 	}
 
+	@Category(MethodTests.class)
 	@Test
 	void testAddDay() {
 		Date d = new Date(1,1,2000);
@@ -94,6 +102,7 @@ class DateTest {
 
 	}
 	
+	@Category(MethodTests.class)
 	@Test 
 	void testAddDay2() {
 		Date d = new Date(1,12,2000);
@@ -101,7 +110,7 @@ class DateTest {
 		assertEquals(d.displayDate(), "The current date is 1/1/2001");
 	}
 	
-	
+	@Category(MethodTests.class)
 	@Test
 	void testAddDaysNeg() {
 		Date d = new Date(9,1,2000);
@@ -110,7 +119,7 @@ class DateTest {
 		
 	}
 	
-	
+	@Category(MethodTests.class)
 	@Test
 	void testSubDay() {
 		Date d = new Date(4,2,2001);
@@ -119,6 +128,7 @@ class DateTest {
 		
 	}
 	
+	@Category(MethodTests.class)
 	@Test
 	void subDaysYear() {
 		Date d = new Date(1,1,2000);
@@ -127,7 +137,7 @@ class DateTest {
 		
 	}
 	
-	
+	@Category(MethodTests.class)
 	@Test
 	void testSubDays2() {
 		Date d = new Date(4,3,2004);
@@ -135,7 +145,7 @@ class DateTest {
 		assertEquals("The current date is 28/2/2004", d.displayDate());
 	}
 	
-	
+	@Category(MethodTests.class)
 	@Test
 	void testSubDayNotNegative() {
 		Date d = new Date(24,1,2002);
@@ -143,6 +153,7 @@ class DateTest {
 		assertEquals(d.displayDate(), "The current date is 20/1/2002");
 	}
 	
+	@Category(MethodTests.class)
 	@Test 
 	void testSubDaysException() {
 		Date dat = new Date(13, 12, 2002);
